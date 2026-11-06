@@ -1,0 +1,19 @@
+# Local dependencies and Python preview cache
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Local secrets and runtime output
+.env
+.env.*
+!.env.example
+*.log
+
+# Editor and operating system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini

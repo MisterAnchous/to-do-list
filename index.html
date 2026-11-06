@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ECEEEF">
+  <meta name="description" content="Спокойное место для ваших задач. Списки, три темы и всё важное под рукой.">
+  <title>To-Do List</title>
+  <script>try{const s=JSON.parse(localStorage.getItem('todo-list:v1'));if(s&&['light','dark','black'].includes(s.theme))document.documentElement.dataset.theme=s.theme}catch{}</script>
+  <link rel="icon" href="favicon.svg?v=todo-1" type="image/svg+xml">
+  <link rel="preload" href="assets/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=sapphire-4">
+  <script src="app.js?v=sapphire-4" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-blue" aria-hidden="true"></div>
+  <div class="ambient ambient-violet" aria-hidden="true"></div>
+
+  <button class="icon-button mobile-nav-button" id="nav-toggle" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false"></button>
+  <button class="icon-button appearance-button" id="appearance-toggle" aria-label="Оформление" aria-haspopup="menu" aria-expanded="false"></button>
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+
+  <aside class="sidebar" id="sidebar" aria-label="Навигация">
+    <div class="sidebar-content">
+      <div class="nav-selection" id="nav-selection" aria-hidden="true"></div>
+      <nav id="main-nav" aria-label="Разделы"></nav>
+      <div class="custom-lists" id="custom-lists" aria-label="Мои списки"></div>
+      <div class="new-list-host" id="new-list-host">
+        <button class="new-list-button" id="new-list-button"><span class="new-list-icon" aria-hidden="true">+</span><span>Новый список</span><span class="keycap" aria-hidden="true">N</span></button>
+      </div>
+      <div class="sidebar-divider"></div>
+      <nav id="trash-nav" aria-label="Корзина"></nav>
+    </div>
+  </aside>
+
+  <main class="main" id="main">
+    <div class="task-column">
+      <header class="page-header">
+        <div class="title-line"><button class="list-appearance-button" id="list-appearance-button" hidden aria-label="Значок и цвет списка" aria-haspopup="dialog" aria-expanded="false"></button><h1 id="page-title" tabindex="-1"></h1><button class="icon-button heading-action" id="heading-action" hidden aria-label="Действия со списком" aria-haspopup="menu"></button></div>
+        <p class="page-subtitle" id="page-subtitle"></p>
+      </header>
+
+      <form class="composer" id="composer" autocomplete="off">
+        <span class="composer-checkbox" aria-hidden="true"></span>
+        <div class="composer-input-wrap"><textarea id="task-input" rows="1" placeholder="Новая задача" aria-label="Новая задача" spellcheck="true"></textarea></div>
+        <div class="composer-controls">
+          <button type="button" class="list-picker" id="composer-list" aria-haspopup="menu" aria-label="Выбрать список"></button>
+          <button type="submit" class="add-task-button" id="add-task-button" aria-label="Добавить задачу"></button>
+        </div>
+      </form>
+
+      <div class="trash-toolbar" id="trash-toolbar" hidden><span>Можно вернуть, если передумаете</span><button id="empty-trash-button" class="text-button danger-text">Очистить корзину</button></div>
+      <div class="task-list" id="task-list" aria-label="Задачи"></div>
+      <section class="empty-state" id="empty-state" aria-labelledby="empty-title">
+        <div class="empty-art" id="empty-art" aria-hidden="true"></div>
+        <h2 id="empty-title"></h2>
+      </section>
+      <div class="list-bottom-space" aria-hidden="true"></div>
+    </div>
+  </main>
+
+  <div id="menu-root"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden><span id="toast-message"></span><button id="toast-close" aria-label="Закрыть уведомление">×</button></div>
+  <div class="sr-only" id="announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <dialog id="confirm-dialog" class="confirm-dialog" aria-labelledby="confirm-title" aria-describedby="confirm-description">
+    <form method="dialog" id="confirm-form">
+      <span class="dialog-icon" id="dialog-icon" aria-hidden="true"></span>
+      <h2 id="confirm-title"></h2><p id="confirm-description"></p>
+      <div class="dialog-actions"><button value="cancel" class="secondary-button">Отмена</button><button value="confirm" class="danger-button" id="confirm-submit">Удалить навсегда</button></div>
+    </form>
+  </dialog>
+</body>
+</html>
